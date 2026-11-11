@@ -1,0 +1,80 @@
+@use '@angular/material' as mat;
+@use 'tokens';
+
+$chrome-height: 272px;
+$image-ratio: 1.5;
+
+:host {
+  @include tokens.page($padding-top: 16px, $gap: 16px);
+}
+
+.photo-detail-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.photo-detail-back {
+  @include mat.button-overrides(
+    (
+      text-container-height: 44px,
+      text-label-text-color: tokens.$link,
+      text-state-layer-color: tokens.$link-hover,
+      text-ripple-color: rgba(tokens.$link-hover, 0.12),
+    )
+  );
+
+  margin-inline-start: -12px;
+
+  &:hover {
+    @include mat.button-overrides(
+      (
+        text-label-text-color: tokens.$link-hover,
+      )
+    );
+  }
+}
+
+.photo-detail-title {
+  margin: 0;
+  color: tokens.$text-muted;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.photo-detail-image {
+  display: block;
+  align-self: center;
+  width: min(100%, max(240px, calc((100dvh - #{$chrome-height}) * #{$image-ratio})));
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: tokens.$radius;
+  background-color: tokens.$surface-raised;
+}
+
+.photo-detail-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.photo-detail-remove {
+  @include mat.button-overrides(
+    (
+      outlined-container-height: 48px,
+      outlined-container-shape: 24px,
+      outlined-horizontal-padding: 24px,
+      outlined-icon-offset: 0,
+      outlined-icon-spacing: 8px,
+      outlined-label-text-color: tokens.$danger,
+      outlined-label-text-tracking: 0.02em,
+      outlined-outline-color: tokens.$danger-outline,
+      outlined-state-layer-color: tokens.$danger,
+      outlined-ripple-color: rgba(tokens.$danger, 0.12),
+    )
+  );
+}

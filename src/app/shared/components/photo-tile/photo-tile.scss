@@ -1,0 +1,66 @@
+@use 'tokens';
+
+:host {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: tokens.$radius;
+  background-color: tokens.$surface-raised;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.photo-tile-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-tile-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  mat-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.photo-tile-badge-favorite {
+  background-color: tokens.$accent;
+  color: tokens.$on-accent;
+}
+
+.photo-tile-badge-hint {
+  background-color: tokens.$scrim;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 120ms;
+
+  :host(:hover) &,
+  :host(:focus-visible) & {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-tile-badge-hint {
+    transition: none;
+  }
+}

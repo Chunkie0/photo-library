@@ -1,0 +1,13 @@
+@use 'tokens';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app-content {
+  width: 100%;
+  max-width: tokens.$content-max-width;
+  margin: 0 auto;
+}

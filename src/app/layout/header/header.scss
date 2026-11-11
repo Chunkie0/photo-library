@@ -1,0 +1,81 @@
+@use '@angular/material' as mat;
+@use 'tokens';
+
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: block;
+}
+
+.header-toolbar {
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: tokens.$surface,
+      container-text-color: tokens.$text,
+      standard-height: tokens.$header-height,
+      mobile-height: tokens.$header-height,
+    )
+  );
+
+  border-bottom: 1px solid tokens.$outline;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.header-link {
+  @include mat.button-overrides(
+    (
+      text-container-height: 44px,
+      text-container-shape: 22px,
+      text-horizontal-padding: 22px,
+      text-with-icon-horizontal-padding: 22px,
+      text-icon-offset: 0,
+      text-icon-spacing: 8px,
+      text-label-text-tracking: 0.02em,
+      text-state-layer-color: tokens.$link-hover,
+      text-ripple-color: rgba(tokens.$link-hover, 0.12),
+    )
+  );
+}
+
+.header-link-active {
+  @include mat.button-overrides(
+    (
+      text-state-layer-color: tokens.$on-accent,
+      text-ripple-color: rgba(tokens.$on-accent, 0.12),
+    )
+  );
+
+  background-color: tokens.$accent;
+}
+
+.header-toolbar .header-link.mat-mdc-button.mat-mdc-button {
+  @include mat.button-overrides(
+    (
+      text-label-text-color: tokens.$link,
+    )
+  );
+
+  &:hover {
+    @include mat.button-overrides(
+      (
+        text-label-text-color: tokens.$link-hover,
+      )
+    );
+  }
+
+  &.header-link-active {
+    @include mat.button-overrides(
+      (
+        text-label-text-color: tokens.$on-accent,
+      )
+    );
+  }
+}

@@ -1,0 +1,30 @@
+$background: #121416;
+$surface: #1c1f23;
+$surface-raised: #23272c;
+$outline: #2c3036;
+$text: #e8eaed;
+$text-muted: #a0a6ad;
+$link: #c9ced4;
+$link-hover: #ffffff;
+$accent: #f5c451;
+$on-accent: #1a1505;
+$danger: #ffb4ab;
+$danger-outline: #8c6a66;
+$scrim: rgba(0, 0, 0, 0.6);
+
+$content-max-width: 960px;
+$page-gutter: 24px;
+$header-height: 64px;
+$radius: 8px;
+
+@mixin focus-ring {
+  outline: 3px solid $accent;
+  outline-offset: 2px;
+}
+
+@mixin page($padding-top: 32px, $gap: 24px) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  padding: $padding-top $page-gutter 48px;
+}

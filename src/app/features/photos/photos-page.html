@@ -1,0 +1,28 @@
+<app-page-header title="Photos" subtitle="Click a photo to add it to your favorites." />
+
+<app-photo-grid>
+  @for (photo of stream.photos(); track photo.id) {
+    @let favorite = favorites.has(photo.id);
+
+    <button
+      type="button"
+      [appPhotoTile]="photo"
+      [favorite]="favorite"
+      favoriteHint
+      [attr.aria-pressed]="favorite"
+      [attr.aria-label]="'Favorite photo ' + photo.id"
+      (click)="favorites.toggle(photo)"
+    ></button>
+  }
+</app-photo-grid>
+
+<div
+  class="photos-sentinel"
+  appInfiniteScroll
+  [appInfiniteScrollDisabled]="stream.loading()"
+  (scrolled)="stream.loadMore()"
+>
+  @if (stream.loading()) {
+    <app-loader label="Loading more photos…" />
+  }
+</div>

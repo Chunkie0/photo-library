@@ -1,0 +1,19 @@
+<img
+  class="photo-tile-image"
+  [src]="photo().thumbnailUrl"
+  alt=""
+  width="400"
+  height="600"
+  loading="lazy"
+  decoding="async"
+/>
+
+@if (favorite()) {
+  <span class="photo-tile-badge photo-tile-badge-favorite">
+    <mat-icon svgIcon="heart-filled" aria-hidden="true" />
+  </span>
+} @else if (favoriteHint()) {
+  <span class="photo-tile-badge photo-tile-badge-hint">
+    <mat-icon svgIcon="heart" aria-hidden="true" />
+  </span>
+}

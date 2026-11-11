@@ -1,0 +1,12 @@
+@use 'tokens';
+
+:host {
+  @include tokens.page;
+}
+
+.photos-sentinel {
+  display: flex;
+  justify-content: center;
+  min-height: 112px;
+  padding: 16px 0 24px;
+}

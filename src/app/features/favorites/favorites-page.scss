@@ -1,0 +1,5 @@
+@use 'tokens';
+
+:host {
+  @include tokens.page;
+}

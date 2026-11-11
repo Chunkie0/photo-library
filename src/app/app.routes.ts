@@ -1,0 +1,24 @@
+import { Routes } from '@angular/router';
+
+const APP_NAME = 'Photo Library';
+
+export const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    title: `Photos · ${APP_NAME}`,
+    loadComponent: () => import('./features/photos/photos-page').then((m) => m.PhotosPage),
+  },
+  {
+    path: 'favorites',
+    title: `Favorites · ${APP_NAME}`,
+    loadComponent: () => import('./features/favorites/favorites-page').then((m) => m.FavoritesPage),
+  },
+  {
+    path: 'photos/:id',
+    title: `Photo · ${APP_NAME}`,
+    loadComponent: () =>
+      import('./features/photo-detail/photo-detail-page').then((m) => m.PhotoDetailPage),
+  },
+  { path: '**', redirectTo: '' },
+];

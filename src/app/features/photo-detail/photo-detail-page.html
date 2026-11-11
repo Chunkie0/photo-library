@@ -1,0 +1,31 @@
+@if (photo(); as photo) {
+  <div class="photo-detail-bar">
+    <a matButton class="photo-detail-back" routerLink="/favorites">
+      <mat-icon svgIcon="arrow-back" aria-hidden="true" />
+      Back to favorites
+    </a>
+    <h1 class="photo-detail-title">Photo {{ photo.id }}</h1>
+  </div>
+
+  <img
+    class="photo-detail-image"
+    [src]="photo.fullUrl"
+    [alt]="'Photo ' + photo.id + ', shown full size'"
+    width="1200"
+    height="800"
+  />
+
+  <div class="photo-detail-actions">
+    <button matButton="outlined" type="button" class="photo-detail-remove" (click)="remove()">
+      <mat-icon svgIcon="heart-off" aria-hidden="true" />
+      Remove from favorites
+    </button>
+  </div>
+} @else if (!removed()) {
+  <app-empty-state
+    title="Photo not found"
+    message="This photo is not in your favorites. It may have been removed."
+  >
+    <a matButton="filled" routerLink="/favorites">Back to favorites</a>
+  </app-empty-state>
+}

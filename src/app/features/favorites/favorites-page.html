@@ -1,0 +1,20 @@
+<app-page-header title="Favorites" [subtitle]="subtitle()" />
+
+@if (favorites.count() > 0) {
+  <app-photo-grid>
+    @for (photo of favorites.photos(); track photo.id) {
+      <a
+        [appPhotoTile]="photo"
+        [routerLink]="['/photos', photo.id]"
+        [attr.aria-label]="'Open photo ' + photo.id"
+      ></a>
+    }
+  </app-photo-grid>
+} @else {
+  <app-empty-state
+    title="No favorites yet"
+    message="Photos you add from the photo stream will show up here."
+  >
+    <a matButton="filled" routerLink="/">Browse photos</a>
+  </app-empty-state>
+}
