@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideAppIcons } from '../../core/icons/app-icons';
 import { FavoritesStore } from '../../core/services/favorites-store';
 import { BROWSER_STORAGE } from '../../core/storage/browser-storage';
-import { MemoryStorage } from '../../testing/memory-storage';
+import { MemoryStorage } from '../../core/storage/memory-storage';
 import { createPhoto, createPhotos } from '../../testing/photo-fixtures';
 import { FavoritesPage } from './favorites-page';
 

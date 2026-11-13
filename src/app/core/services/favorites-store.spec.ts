@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { MemoryStorage } from '../../testing/memory-storage';
+import { MemoryStorage } from '../storage/memory-storage';
 import { createPhoto } from '../../testing/photo-fixtures';
 import { BROWSER_STORAGE } from '../storage/browser-storage';
 import { FAVORITES_STORAGE_KEY, FavoritesStore } from './favorites-store';
@@ -116,6 +116,46 @@ describe('FavoritesStore', () => {
 
     expect(afterReload).not.toBe(beforeReload);
     expect(afterReload.photos()).toEqual([first, second]);
+  });
+
+  it('picks up favorites changed in another tab', () => {
+    const store = createStore();
+    store.add(first);
+
+    storage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([first, second]));
+    window.dispatchEvent(new StorageEvent('storage', { key: FAVORITES_STORAGE_KEY }));
+
+    expect(store.photos()).toEqual([first, second]);
+  });
+
+  it('keeps the favorites of another tab when adding one', () => {
+    const store = createStore();
+
+    storage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([first]));
+    window.dispatchEvent(new StorageEvent('storage', { key: FAVORITES_STORAGE_KEY }));
+    store.add(second);
+
+    expect(storedFavorites()).toEqual([first, second]);
+  });
+
+  it('empties the favorites when another tab clears the storage', () => {
+    const store = createStore();
+    store.add(first);
+
+    storage.clear();
+    window.dispatchEvent(new StorageEvent('storage', { key: null }));
+
+    expect(store.photos()).toEqual([]);
+  });
+
+  it('ignores storage changes that concern other keys', () => {
+    const store = createStore();
+    store.add(first);
+
+    storage.setItem(FAVORITES_STORAGE_KEY, '[]');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'something-else' }));
+
+    expect(store.photos()).toEqual([first]);
   });
 
   it.each([

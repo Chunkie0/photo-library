@@ -5,7 +5,7 @@ import { appConfig } from './app.config';
 import { FavoritesStore } from './core/services/favorites-store';
 import { BROWSER_STORAGE } from './core/storage/browser-storage';
 import { FakeIntersectionObserver } from './testing/fake-intersection-observer';
-import { MemoryStorage } from './testing/memory-storage';
+import { MemoryStorage } from './core/storage/memory-storage';
 import { createPhoto } from './testing/photo-fixtures';
 
 describe('App', () => {

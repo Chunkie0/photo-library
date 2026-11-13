@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
@@ -20,12 +20,11 @@ export class PhotoDetailPage {
 
   protected readonly photo = computed(() => this.favorites.get(this.id()));
 
-  protected readonly removed = signal(false);
-
   protected async remove(): Promise<void> {
-    this.removed.set(true);
-    this.favorites.remove(this.id());
+    const id = this.id();
 
     await this.router.navigate(['/favorites']);
+
+    this.favorites.remove(id);
   }
 }

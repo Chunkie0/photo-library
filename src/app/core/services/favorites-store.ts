@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { DOCUMENT, DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
 import { Photo, isPhoto } from '../models/photo';
 import { BROWSER_STORAGE } from '../storage/browser-storage';
 
@@ -15,6 +15,19 @@ export class FavoritesStore {
 
   readonly photos = this.state.asReadonly();
   readonly count = computed(() => this.state().length);
+
+  constructor() {
+    const view = inject(DOCUMENT).defaultView;
+
+    const onStorage = (event: StorageEvent): void => {
+      if (event.key === FAVORITES_STORAGE_KEY || event.key === null) {
+        this.state.set(this.restore());
+      }
+    };
+
+    view?.addEventListener('storage', onStorage);
+    inject(DestroyRef).onDestroy(() => view?.removeEventListener('storage', onStorage));
+  }
 
   has(id: string): boolean {
     return this.byId().has(id);

@@ -6,7 +6,7 @@ import { FavoritesStore } from '../../core/services/favorites-store';
 import { PhotoApi } from '../../core/services/photo-api';
 import { BROWSER_STORAGE } from '../../core/storage/browser-storage';
 import { FakeIntersectionObserver } from '../../testing/fake-intersection-observer';
-import { MemoryStorage } from '../../testing/memory-storage';
+import { MemoryStorage } from '../../core/storage/memory-storage';
 import { createPhotos } from '../../testing/photo-fixtures';
 import { PhotosPage } from './photos-page';
 
